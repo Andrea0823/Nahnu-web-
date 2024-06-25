@@ -1,2 +1,2 @@
 # Nahnu-web-
-Traductor y diccionario (otomí
+Traductor y diccionario (otomí-español)
