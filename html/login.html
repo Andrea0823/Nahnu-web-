@@ -34,29 +34,65 @@
                 <p>¿No tienes una cuenta? <a href="../html/registro.html">Regístrate</a></p>
             </div>
         </form>
-        <script>
-            document.getElementById('login-form').addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevenir el envío del formulario
-                // Aquí puedes añadir lógica de validación o autenticación si es necesario
-                window.location.href = '../html/diccionario.html'; // Redirigir
-            });
-
-            document.getElementById('toggle-password').addEventListener('click', function() {
-                const passwordField = document.getElementById('password');
-                const passwordToggle = document.getElementById('toggle-password');
-                if (passwordField.type === 'password') {
-                    passwordField.type = 'text';
-                    passwordToggle.classList.remove('fa-eye');
-                    passwordToggle.classList.add('fa-eye-slash');
-                } else {
-                    passwordField.type = 'password';
-                    passwordToggle.classList.remove('fa-eye-slash');
-                    passwordToggle.classList.add('fa-eye');
-                }
-            });
-        </script>
     </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault(); // Prevenir el envío del formulario
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const data = {
+                    "nombre": username,
+                    "password": password
+                };
+
+                // Envía los datos usando fetch
+                const response = await fetch('http://192.168.0.151:3002/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                // Maneja la respuesta
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('Éxito:', result);
+                    alert('Inicio de sesión exitoso.');
+                    // Redirigir a la página del diccionario
+                    window.location.href = '../html/diccionario.html';
+                } else if (response.status >= 400 && response.status < 500) {
+                    console.error('Error del cliente:', response.status, response.statusText);
+                    alert(`Error del cliente: ${response.status} - ${response.statusText}`);
+                } else if (response.status >= 500 && response.status < 600) {
+                    console.error('Error del servidor:', response.status, response.statusText);
+                    alert(`Error del servidor: ${response.status} - ${response.statusText}`);
+                } else {
+                    console.error('Error inesperado:', response.status, response.statusText);
+                    alert(`Error inesperado: ${response.status} - ${response.statusText}`);
+                }
+            } catch (error) {
+                console.error('Error en el envío del formulario:', error);
+                alert(`Error en el envío del formulario: ${error.message}`);
+            }
+        });
+
+        document.getElementById('toggle-password').addEventListener('click', function() {
+            const passwordField = document.getElementById('password');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }
+        });
+    </script>
 </body>
 </html>
-
-

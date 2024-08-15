@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <!-- Agrega un enlace al archivo de iconos de Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
     <div class="register-container">
         <form class="register-form" id="register-form">
@@ -24,14 +26,16 @@
                 <label for="password">Contraseña</label>
                 <div class="password-container">
                     <input type="password" id="password" name="password" required>
-                    <i class="fas fa-eye" id="toggle-password" style="cursor: pointer; position: absolute; right: 10px; top: 40%;"></i>
+                    <i class="fas fa-eye" id="toggle-password"
+                        style="cursor: pointer; position: absolute; right: 10px; top: 40%;"></i>
                 </div>
             </div>
             <div class="input-group">
                 <label for="confirm-password">Confirmar Contraseña</label>
                 <div class="password-container">
                     <input type="password" id="confirm-password" name="confirm-password" required>
-                    <i class="fas fa-eye" id="toggle-confirm-password" style="cursor: pointer; position: absolute; right: 10px; top: 40%;"></i>
+                    <i class="fas fa-eye" id="toggle-confirm-password"
+                        style="cursor: pointer; position: absolute; right: 10px; top: 40%;"></i>
                 </div>
             </div>
             <button type="submit">Registrarse</button>
@@ -65,28 +69,58 @@
         togglePasswordVisibility("toggle-confirm-password", "confirm-password");
 
         // Función para manejar el envío del formulario de registro
-        document.getElementById('register-form').addEventListener('submit', function(event) {
+        document.getElementById('register-form').addEventListener('submit', async function (event) {
             event.preventDefault(); // Prevenir el envío tradicional del formulario
-
+        
             // Obtener los valores de los campos de entrada
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
-
+        
             // Verificar que las contraseñas coincidan
             if (password !== confirmPassword) {
                 alert('Las contraseñas no coinciden. Por favor, intenta de nuevo.');
                 return;
             }
-
-            // Aquí puedes añadir lógica para registrar al usuario
-            // Por ejemplo, enviar los datos a un servidor usando fetch o XMLHttpRequest
-            // fetch('/path/to/server/endpoint', { ... })
-
-            alert('Registro exitoso. Ahora puedes iniciar sesión.');
-            // Después de un registro exitoso, redirigir a la página de inicio de sesión
-            window.location.href = '../html/login.html';
-        });
+        
+            try {
+                const data = {
+                    "nombre": username,
+                    "password": password
+                };
+        
+                // Envía los datos usando fetch
+                const response = await fetch('http://192.168.0.151:3002/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+        
+                // Maneja la respuesta
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('Éxito:', result);
+                    alert('Registro exitoso. Ahora puedes iniciar sesión.');
+                    // Después de un registro exitoso, redirigir a la página de inicio de sesión
+                    window.location.href = '../html/login.html';
+                } else if (response.status >= 400 && response.status < 500) {
+                    console.error('Error del cliente:', response.status, response.statusText);
+                    alert(`Error del cliente: ${response.status} - ${response.statusText}`);
+                } else if (response.status >= 500 && response.status < 600) {
+                    console.error('Error del servidor:', response.status, response.statusText);
+                    alert(`Error del servidor: ${response.status} - ${response.statusText}`);
+                } else {
+                    console.error('Error inesperado:', response.status, response.statusText);
+                    alert(`Error inesperado: ${response.status} - ${response.statusText}`);
+                }
+            } catch (error) {
+                console.error('Error en el envío del formulario:', error);
+                alert(`Error en el envío del formulario: ${error.message}`);
+            }
+        });        
     </script>
 </body>
+
 </html>
