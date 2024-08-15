@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Regiones</title>
+    <link rel="icon" type="image/x-icon" href="../img/logo/Cabeza.png">
+    <link rel="stylesheet" href="../css/region.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo-container">
+            <img src="../img/logo/Cabeza.png" alt="Logo" class="header-logo">
+            <h1>Nahnu</h1>
+        </div>
+        <nav class="navbar">
+            <ul class="navbar-menu">
+                <li><a href="../html/diccionario.html">Diccionario</a></li>
+                <li><a href="../html/traductor.html">Traductor</a></li>
+                <li><a href="../html/login.html">Cerrar Sesion</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="content-container">
+        <div class="form-container">
+            <div class="input-group">
+                <label for="region">Región:</label>
+                <input type="text" id="region">
+            </div>
+            <button class="btn" onclick="saveRecord()">Guardar</button>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Región</th>
+                    </tr>
+                </thead>
+                <tbody id="record-table">
+                    <!-- Los registros se agregarán aquí -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="../js/regiones.js"></script>
+</body>
+</html>

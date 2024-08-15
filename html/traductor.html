@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interfaz de Registro</title>
+    <link rel="icon" type="image/x-icon" href="../img/logo/Cabeza.png">
+    <link rel="stylesheet" href="../css/traductor.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo-container">
+            <img src="../img/logo/Cabeza.png" alt="Logo" class="header-logo">
+            <h1>Nahnu</h1>
+        </div>
+        <nav class="navbar">
+            <ul class="navbar-menu">
+                <li><a href="../html/diccionario.html">Diccionario</a></li>
+                <li><a href="../html/traductor.html">Traductor</a></li>
+                <li><a href="../html/login.html">Cerrar sesion</a></li>
+            </ul>
+        </nav>
+    </header> 
+    <div class="content-container">
+        <div class="form-container">
+            <div class="input-group">
+                <label for="audio-nahuatl">Audio Náhuatl:</label>
+                <input type="file" id="audio-nahuatl" accept="audio/*">
+            </div>
+            <div class="input-group">
+                <label for="transcription-nahuatl">Transcripción Náhuatl:</label>
+                <textarea id="transcription-nahuatl" rows="3"></textarea>
+            </div>
+            <div class="input-group">
+                <label for="audio-espanol">Audio Español:</label>
+                <input type="file" id="audio-espanol" accept="audio/*">
+            </div>
+            <div class="input-group">
+                <label for="transcription-espanol">Transcripción Español:</label>
+                <textarea id="transcription-espanol" rows="3"></textarea>
+            </div>
+            <button class="btn" onclick="saveRecord()">Guardar</button>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Audio Náhuatl</th>
+                        <th>Transcripción Náhuatl</th>
+                        <th>Audio Español</th>
+                        <th>Transcripción Español</th>
+                    </tr>
+                </thead>
+                <tbody id="record-table">
+                    <!-- Los registros se agregarán aquí -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="../js/traductor.js"></script>
+</body>
+</html>

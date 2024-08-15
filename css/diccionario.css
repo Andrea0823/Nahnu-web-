@@ -1,0 +1,105 @@
+/* Estilos generales del body */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #b3cde0, #ffffff);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos para el encabezado */
+.header {
+    display: flex;
+    align-items: center; /* Alinea verticalmente el logo y el título */
+    justify-content: space-between; /* Espacia el logo y el título de la barra de navegación */
+    padding: 10px 20px; /* Espaciado interno del encabezado */
+    background-color: #3498db; /* Color de fondo del encabezado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Asegura que el encabezado esté por encima de otros elementos */
+}
+
+.header-logo-container {
+    display: flex;
+    align-items: center; /* Alinea verticalmente el logo y el título */
+}
+
+.header-logo {
+    width: 50px; /* Ajusta el tamaño del logo según sea necesario */
+    height: auto; /* Mantiene la relación de aspecto del logo */
+    margin-right: 10px; /* Espacio entre el logo y el título */
+}
+
+.header h1 {
+    color: #fff; /* Color del título */
+    margin: 0; /* Elimina el margen del título */
+    font-size: 24px; /* Tamaño del título */
+}
+
+/* Estilos para la barra de navegación */
+.navbar {
+    margin-left: auto; /* Alinea la barra de navegación a la derecha */
+}
+
+.navbar-menu {
+    list-style: none; /* Elimina los puntos de la lista */
+    display: flex; /* Muestra los elementos en línea */
+    margin: 0; /* Elimina el margen de la lista */
+    padding: 0; /* Elimina el padding de la lista */
+}
+
+.navbar-menu li {
+    margin: 0 15px; /* Espacio entre los elementos de la lista */
+}
+
+.navbar-menu a {
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    color: #fff; /* Color de los enlaces */
+    font-size: 18px; /* Tamaño del texto de los enlaces */
+    padding: 10px 15px; /* Espaciado interno de los enlaces */
+    display: inline-block; /* Asegura que el padding se aplique correctamente */
+    transition: background-color 0.3s, color 0.3s; /* Transiciones para efectos de hover */
+}
+
+.navbar-menu a:hover {
+    background-color: #2980b9; /* Color de fondo al pasar el ratón */
+    border-radius: 5px; /* Bordes redondeados */
+    color: #fff; /* Color del texto al pasar el ratón */
+}
+
+/* Estilos para el contenedor de botones */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 60px); /* Ajusta para el tamaño del encabezado */
+    margin-top: 60px; /* Asegura que los botones estén debajo del encabezado */
+}
+
+.button-container .btn {
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.button-container .btn:hover {
+    background-color: #2980b9; /* Color de fondo al pasar el ratón */
+    transform: scale(1.05); /* Escala ligeramente el botón */
+}
+
+.button-container .btn:active {
+    background-color: #1f6d9c; /* Color de fondo al hacer clic */
+    transform: scale(0.95); /* Reduce el tamaño del botón al hacer clic */
+}
